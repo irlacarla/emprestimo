@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="{% url 'perfil' %}"> Perfil </a></li>
+  <li role="presentation"><a href="{% url 'editar' %}"> Editar Perfil </a></li>
+  <li role="presentation"><a href="{% url 'trocarsenha' %}"> Mudar senha </a></li>
+</ul>
+
+
+<div class="form">
+    {% block Perfil_content %}
+  <p>Usuário: {{ user }}</p>
+  <p>E-mail: {{ user.email }}</p>
+  <p>Nome: {{ user.first_name }}</p>
+  <p>Sobrenome: {{ user.last_name }}</p>
+  {% endblock %}
+</div>
+{% endblock content %}
