@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
+
+
 # Create your views here.
 
 def index(request):
@@ -21,6 +25,19 @@ def index(request):
 def central(request):
     
         return render(request, "central.html")
+        
+        
+def criar_usuario(request):
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = UserCreationForm()
+
+    return render(request, "criar_usuario.html", {"form": form})
         
         
         
@@ -50,23 +67,20 @@ def editar (request):
     return render (request,"editar.html",context)   
 
 
-def trocarsenha(request):
-    if not request.user.is_authenticated():
-        return redirect(index)
-    context = {}
+def passwordReset(request):
+    """ Sets a new password for the user (without needing to know the old
+    password)
+    """
+    
+    form = SetPasswordForm(user=request.user, data=request.POST or None)
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            context['success'] = True
-    else:
-        form = PasswordChangeForm(user=request.user)
-    context ['form'] = form
+            return redirect(reverse('index'))
+        else:
+            form = SetPasswordForm(user=request.user)
 
-    return render (request,"password.html",context)     
-    
-def cadastrar(request):
+return render(request, "reset.html"{"form": form})
 
-    return render(request, "cadastrar.html")      
   
     

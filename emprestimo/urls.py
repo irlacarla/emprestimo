@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.views import logout
 from core import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name = "index"),
-    url(r'central/$', views.central),
-    url(r'^central/perfil/$', views.perfil,name = "perfil")
-    url(r'^central/perfil/editar/$', views.editar,name = "editar"),
-    url(r'^central/perfil/senha/$', views.trocarsenha,name = "trocarsenha"), 
-    url(r'^central/$', views.cadastrar,name = "cadastrar"),
+    url(r'central/$', views.central), 
+    url(r'criar/$', views.criar_usuario, name = "criar" ),
+    url(r'^sair/$', logout, {'next_page': 'index'}, name='logout'),
+    url(r'reset/$', views.passwordReset, name='passwordReset'),
 ]
