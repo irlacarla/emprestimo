@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
 
 from django.contrib.auth import login
 
@@ -80,7 +80,7 @@ def passwordReset(request):
         else:
             form = SetPasswordForm(user=request.user)
 
-return render(request, "reset.html"{"form": form})
+    return render(request, "reset.html", {"form": form})
 
   
     
