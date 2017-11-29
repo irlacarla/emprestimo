@@ -82,5 +82,23 @@ def passwordReset(request):
 
     return render(request, "reset.html", {"form": form})
 
+def criar_objeto(request):
+    lista_notas = Nota.objects.all().order_by('nome')
+    return render(request, 'criar_objeto.html', {'nota': lista_notas})
+
+def detalhes_objeto(request, pk):
+    objeto = Objeto.objects.get(id=pk)
+    return render(request, 'detalhes.html', {'detalhes': nota})
+    
+    
+def criar_objetos(request):
+    form = Notasforms(request.POST or None)
+    if request.method == 'POST':
+        form = Notasforms(request.POST)
+        form = form.save()
+        form = Notasforms()
+        
+    return render(request, 'criarobj.html', {'forms': form})    
+   
   
     

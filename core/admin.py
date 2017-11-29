@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import CadastrarObjeto
 
-# Register your models here.
+
+admin.site.register(CadastrarObjeto)

@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'criar/$', views.criar_usuario, name = "criar" ),
     url(r'^sair/$', logout, {'next_page': 'index'}, name='logout'),
     url(r'reset/$', views.passwordReset, name='passwordReset'),
+    url(r'^(?P<pk>\d+)/$', views.detalhes_objeto, name='detalhes'),
+    url(r'^criarobj/$', views.criar_objetos, name='criarobj'),
 ]

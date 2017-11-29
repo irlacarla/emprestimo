@@ -1,0 +1,13 @@
+
+    
+{% for nota in objetos %}
+    <li><a href="/{{nota.id}}/">{{ nota.texto }}</a></li>
+{% endfor %}  
+ 
+ 
+ {% csrf_token %}
+  
+  {{ form }}    
+  
+  <button type="submit" >Cadastrar Novo</button>
+</form> 
