@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
-
+from .models import CadastrarObjeto
 from django.contrib.auth import login
 
 
@@ -83,11 +84,11 @@ def passwordReset(request):
     return render(request, "reset.html", {"form": form})
 
 def criar_objeto(request):
-    lista_notas = Nota.objects.all().order_by('nome')
-    return render(request, 'criar_objeto.html', {'nota': lista_notas})
+    lista_notas = CadastrarObjeto.objects.all().order_by('data')
+    return render(request, 'criar_objeto.html', {'notas': lista_notas})
 
-def detalhes_objeto(request, pk):
-    objeto = Objeto.objects.get(id=pk)
+def detalhes_objeto(request,pk):
+    objeto = CadastrarObjeto.objects.get(id=pk)
     return render(request, 'detalhes.html', {'detalhes': nota})
     
     
