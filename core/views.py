@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
 from .models import CadastrarObjeto
+from .forms import Notasforms
+
 from django.contrib.auth import login
 
 
@@ -83,23 +85,25 @@ def passwordReset(request):
 
     return render(request, "reset.html", {"form": form})
 
-def criar_objeto(request):
-    lista_notas = CadastrarObjeto.objects.all().order_by('data')
-    return render(request, 'criar_objeto.html', {'notas': lista_notas})
+def indexx(request):
+	lista_notas = Nota.objects.all().order_by('data') 
+	return render(request, 'central.html', {'notas': lista_notas}) 
+
+
 
 def detalhes_objeto(request,pk):
-    objeto = CadastrarObjeto.objects.get(id=pk)
+    nota = CadastrarObjeto.objects.get(id=pk)
     return render(request, 'detalhes.html', {'detalhes': nota})
     
     
-def criar_objetos(request):
+def criar_notas(request):
     form = Notasforms(request.POST or None)
     if request.method == 'POST':
         form = Notasforms(request.POST)
         form = form.save()
         form = Notasforms()
         
-    return render(request, 'criarobj.html', {'forms': form})    
+    return render(request, 'criarobj.html', {'form': form})    
    
   
     

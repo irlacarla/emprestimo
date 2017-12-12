@@ -1,6 +1,10 @@
 
 <p><center><h1 style="color:purple;" >Bem Vindo!</center></h1></p>
 <p><center><h2 style="color:purple;" >{{user}}</center></h2></p>
+{% for nota in notas %}
+	<li><hreaf="/{{nota.id}}/">{{ nota.titulo }}</a></li>
+
+{% endfor %}
 <a href="{%url 'logout'%}"><button>Sair</button>
 <a href="{%url 'passwordReset'%}"><button>Mudar Senha</button> 
 	

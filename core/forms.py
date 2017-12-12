@@ -1,6 +1,7 @@
 from django import forms
-from .models import Objeto
-from .forms import CadastrarObjetoforms
+from .models import CadastrarObjeto
+from .forms import Notaforms
+
 
 class Notasforms(forms.ModelForms):
     class Meta:
