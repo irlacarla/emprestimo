@@ -26,8 +26,8 @@ def index(request):
     
     
 def central(request):
-    
-        return render(request, "central.html")
+    lista_notas = CadastrarObjeto.objects.all().order_by('nome') 
+    return render(request, 'central.html', {'notas': lista_notas}) 
         
         
 def criar_usuario(request):
@@ -86,7 +86,7 @@ def passwordReset(request):
     return render(request, "reset.html", {"form": form})
 
 def indexx(request):
-	lista_notas = Nota.objects.all().order_by('data') 
+	lista_notas = Nota.objects.all().order_by('nome') 
 	return render(request, 'central.html', {'notas': lista_notas}) 
 
 
@@ -96,14 +96,16 @@ def detalhes_objeto(request,pk):
     return render(request, 'detalhes.html', {'detalhes': nota})
     
     
-def criar_notas(request):
+def criar_objetos(request):
     form = Notasforms(request.POST or None)
     if request.method == 'POST':
-        form = Notasforms(request.POST)
+        form = Notasforms(request.POST) 
         form = form.save()
         form = Notasforms()
         
-    return render(request, 'criarobj.html', {'form': form})    
+    return render(request, 'criarobj.html', {'form': form}) 
+    
+       
    
   
     
